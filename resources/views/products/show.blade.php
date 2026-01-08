@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('title', $product->name . ' - Mi Tienda')
 
@@ -62,14 +62,27 @@
             </div>
             @endif
 
-            <div class="flex space-x-4">
-                <a href="{{ route('cart.store') }}"
-                   class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition">
-                    🛒 Añadir al Carrito
-                </a>
+            <!-- Botones de Acción -->
+            <div class="flex items-center space-x-4">
+                <form action="{{ route('cart.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition">
+                        🛒 Añadir al Carrito
+                    </button>
+                </form>
 
-                <a href="{{ route('products.index') }}"
-                   class="border border-primary-600 text-primary-600 px-6 py-3 rounded-lg hover:bg-primary-50 transition">
+                {{-- Botón de Wishlist (solo para usuarios autenticados) --}}
+                @auth
+                <form action="{{ route('admin.wishlist.store', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="border-2 border-red-500 text-red-500 px-6 py-3 rounded-lg hover:bg-red-50 transition">
+                        ❤️ Guardar en Favoritos
+                    </button>
+                </form>
+                @endauth
+
+                <a href="{{ route('products.index') }}" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-100 transition">
                     ← Volver a Productos
                 </a>
             </div>

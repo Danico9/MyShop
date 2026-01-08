@@ -27,9 +27,9 @@
     </script>
     @vite(['resources/css/app.css'])
 </head>
-<body class="bg-gray-50 dark:bg-gray-900">
+<body class="bg-gray-50">
 <!-- Header con navegación -->
-<header class="bg-white dark:bg-gray-800 shadow-lg relative">
+<header class="bg-white shadow-lg relative">
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <!-- Logo -->
@@ -39,20 +39,20 @@ hover:text-primary-700 transition">🛍 Mi Tienda</a>
             </div>
             <!-- Navegación desktop -->
             <nav class="hidden lg:flex space-x-8">
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Inicio</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Productos</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Categorías</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Ofertas</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Contacto</a>
             </nav>
             <!-- Botones desktop -->
             <div class="hidden lg:flex items-center space-x-4">
-                <button class="text-gray-700 dark:text-gray-300
+                <button class="text-gray-700
                 hover:text-primary-600 transition">
                     🛒 Carrito (0)
                 </button>
@@ -66,22 +66,19 @@ transition">
                     Registrarse
                 </button>
                 <!-- Botón de modo oscuro desktop -->
-                <button id="darkModeToggleDesktop" class="text-gray-700
-dark:text-gray-300 hover:text-primary-600 transition p-2 rounded-full">
+                <button id="darkModeToggleDesktop" class="text-gray-700 hover:text-primary-600 transition p-2 rounded-full">
                     🌙
                 </button>
             </div>
             <!-- Botones móvil/tablet -->
             <div class="flex items-center space-x-2 lg:hidden">
                 <!-- Botón de modo oscuro -->
-                <button id="darkModeToggle" class="text-gray-700
-dark:text-gray-300 hover:text-primary-600 transition p-2 rounded-full darkmode-
+                <button id="darkModeToggle" class="text-gray-700 hover:text-primary-600 transition p-2 rounded-full darkmode-
 toggle">
                     🌙
                 </button>
                 <!-- Botón menú móvil -->
-                <button id="mobileMenuToggle" class="text-gray-700
-dark:text-gray-300 hover:text-primary-600 transition">
+                <button id="mobileMenuToggle" class="text-gray-700 hover:text-primary-600 transition">
                     <svg class="w-6 h-6" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" strokelinejoin="
@@ -92,21 +89,21 @@ round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </div>
         <!-- Menú móvil -->
         <div id="mobileMenu" class="lg:hidden hidden mt-4 pb-4
-border-t border-gray-200 dark:border-gray-700 mobile-menu">
+border-t border-gray-200 mobile-menu">
             <nav class="flex flex-col space-y-4 pt-4">
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Inicio</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Productos</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Categorías</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Ofertas</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300
+                <a href="#" class="text-gray-700
 hover:text-primary-600 transition">Contacto</a>
                 <div class="flex flex-col space-y-2 pt-4 border-t
-                border-gray-200 dark:border-gray-700">
-                    <button class="text-left text-gray-700 dark:textgray-
+                border-gray-200">
+                    <button class="text-left text-gray-700
 300 hover:text-primary-600 transition">
                         🛒 Carrito (0)
                     </button>
@@ -152,18 +149,16 @@ duration-300 ease-in-out">
 <!-- Categorías de Productos -->
 <section class="py-16">
     <div class="container mx-auto px-6">
-        <h3 class="text-3xl font-bold mb-12 text-center text-gray-900
-dark:text-white">
+        <h3 class="text-3xl font-bold mb-12 text-center text-gray-900">
             Nuestras Categorías
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-
 8">
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 p-6 product-card cursor-pointer">
                 <div class="text-4xl text-primary-500 mb-4">📦</div>
-                <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Categoría 1</h4>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                <h4 class="text-xl font-bold mb-2 text-gray-900">Categoría 1</h4>
+                <p class="text-gray-600 mb-4">
                     Descripción de la primera categoría de productos.
                 </p>
                 <button class="text-primary-600 font-semibold
@@ -171,12 +166,11 @@ hover:text-primary-700 transition">
                     Ver Productos →
                 </button>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 p-6 product-card cursor-pointer">
                 <div class="text-4xl text-primary-500 mb-4">🛍</div>
-                <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Categoría 2</h4>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                <h4 class="text-xl font-bold mb-2 text-gray-900">Categoría 2</h4>
+                <p class="text-gray-600 mb-4">
                     Descripción de la segunda categoría de productos.
                 </p>
                 <button class="text-primary-600 font-semibold
@@ -184,12 +178,11 @@ hover:text-primary-700 transition">
                     Ver Productos →
                 </button>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 p-6 product-card cursor-pointer">
                 <div class="text-4xl text-primary-500 mb-4">⭐</div>
-                <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Categoría 3</h4>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                <h4 class="text-xl font-bold mb-2 text-gray-900">Categoría 3</h4>
+                <p class="text-gray-600 mb-4">
                     Descripción de la tercera categoría de productos.
                 </p>
                 <button class="text-primary-600 font-semibold
@@ -197,12 +190,11 @@ hover:text-primary-700 transition">
                     Ver Productos →
                 </button>
             </div>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 p-6 product-card cursor-pointer">
                 <div class="text-4xl text-primary-500 mb-4">🎯</div>
-                <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Categoría 4</h4>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                <h4 class="text-xl font-bold mb-2 text-gray-900">Categoría 4</h4>
+                <p class="text-gray-600 mb-4">
                     Descripción de la cuarta categoría de productos.
                 </p>
                 <button class="text-primary-600 font-semibold
@@ -214,24 +206,22 @@ dark:text-white">Categoría 4</h4>
     </div>
 </section>
 <!-- Productos Destacados -->
-<section class="py-16 bg-gray-100 dark:bg-gray-800">
+<section class="py-16 bg-gray-100">
     <div class="container mx-auto px-6">
-        <h3 class="text-3xl font-bold mb-12 text-center text-gray-900
-dark:text-white">
+        <h3 class="text-3xl font-bold mb-12 text-center text-gray-900">
             Productos Destacados
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-
 8">
-            <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 overflow-hidden product-card">
-                <div class="h-48 bg-gray-200 dark:bg-gray-600 flex
+                <div class="h-48 bg-gray-200 flex
 items-center justify-center">
                     <span class="text-4xl">📦</span>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Producto 1</h4>
-                    <p class="text-gray-600 dark:text-gray-300 mb-
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Producto 1</h4>
+                    <p class="text-gray-600 mb-
 4">Descripción del primer producto</p>
                     <div class="flex items-center justify-between">
 <span class="text-2xl font-bold text-primary-
@@ -243,16 +233,15 @@ py-2 rounded-lg hover:bg-primary-700 transition">
                     </div>
                 </div>
             </div>
-            <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 overflow-hidden product-card">
-                <div class="h-48 bg-gray-200 dark:bg-gray-600 flex
+                <div class="h-48 bg-gray-200 flex
 items-center justify-center">
                     <span class="text-4xl">🛍</span>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Producto 2</h4>
-                    <p class="text-gray-600 dark:text-gray-300 mb-
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Producto 2</h4>
+                    <p class="text-gray-600 mb-
 4">Descripción del segundo producto</p>
                     <div class="flex items-center justify-between">
 <span class="text-2xl font-bold text-primary
@@ -264,16 +253,15 @@ py-2 rounded-lg hover:bg-primary-700 transition">
                     </div>
                 </div>
             </div>
-            <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg
+            <div class="bg-white rounded-lg shadow-lg
 overflow-hidden product-card">
-                <div class="h-48 bg-gray-200 dark:bg-gray-600 flex
+                <div class="h-48 bg-gray-200 flex
 items-center justify-center">
                     <span class="text-4xl">⭐</span>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-gray-900
-dark:text-white">Producto 3</h4>
-                    <p class="text-gray-600 dark:text-gray-300 mb-
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Producto 3</h4>
+                    <p class="text-gray-600 mb-
 4">Descripción del tercer producto</p>
                     <div class="flex items-center justify-between">
 <span class="text-2xl font-bold text-primary-

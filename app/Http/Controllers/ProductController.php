@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Offer;
@@ -36,19 +38,61 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        // En una aplicación real, aquí se mostraría un formulario.
-        return redirect()->route('products.index');
+        // Cargar todas las categorías y ofertas para los selectores del formulario
+        $categories = Category::all();
+        $offers = Offer::all();
+
+        // Retornamos la vista que crearemos en el siguiente paso
+        return view('admin.products.create', compact('categories', 'offers'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena un nuevo producto en la base de datos.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        // En una aplicación real, aquí se guardaría en la BD.
-        return redirect()->route('products.index');
+        // PASO 1: Validar todos los datos del formulario
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255|unique:products,name',
+            'description' => 'required|string|max:1000',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Máx 2MB
+            'price'       => 'required|numeric|min:0|max:999999.99',
+            'category_id' => 'required|exists:categories,id',
+            'offer_id'    => 'nullable|exists:offers,id',
+        ], [
+            // Mensajes de error personalizados
+            'name.required'        => 'El nombre del producto es obligatorio.',
+            'name.unique'          => 'Ya existe un producto con ese nombre.',
+            'description.required' => 'La descripción es obligatoria.',
+            'image.image'          => 'El archivo debe ser una imagen.',
+            'image.mimes'          => 'La imagen debe ser de tipo: jpeg, png, jpg, webp.',
+            'image.max'            => 'La imagen no debe superar los 2MB.',
+            'price.required'       => 'El precio es obligatorio.',
+            'price.numeric'        => 'El precio debe ser un número.',
+            'category_id.required' => 'Debes seleccionar una categoría.',
+            'category_id.exists'   => 'La categoría seleccionada no es válida.',
+            'offer_id.exists'      => 'La oferta seleccionada no es válida.',
+        ]);
+
+        // PASO 2: Procesar la imagen si fue subida
+        if ($request->hasFile('image')) {
+            // Guardar en el disco 'public' dentro de la carpeta 'products'
+            // Laravel genera automáticamente un nombre único (hash) para el archivo
+            $imagePath = $request->file('image')->store('products', 'public');
+
+            // Guardamos la ruta en el array de datos validados
+            $validated['image'] = $imagePath;
+        }
+
+        // PASO 3: Crear el producto con los datos validados
+        // Usamos create() que asigna masivamente los campos definidos en $fillable del Modelo
+        Product::create($validated);
+
+        // PASO 4: Redirigir con mensaje de éxito (usando el sistema flash que creamos antes)
+        return redirect()->route('admin.products.index')
+            ->with('success', '¡Producto creado exitosamente!');
     }
 
     /**
@@ -73,29 +117,80 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar un producto existente.
      */
-    public function edit(string $id)
+    public function edit(Product $product): View
     {
-        return redirect()->route('products.show', $id)
-            ->with('success', 'Producto editado');
+        // Cargar todas las categorías y ofertas para los selectores del formulario
+        $categories = Category::all();
+        $offers = Offer::all();
+
+        return view('admin.products.edit', compact('product', 'categories', 'offers'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un producto existente en la base de datos.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        return redirect()->route('products.show', $id)
-            ->with('success', 'Producto actualizado exitosamente');
+        // PASO 1: Validar los datos del formulario
+        $validated = $request->validate([
+            // unique:products,name,ID -> Ignora el ID actual para evitar falso error de duplicado
+            'name'        => 'required|string|max:255|unique:products,name,' . $product->id,
+            'description' => 'required|string|max:1000',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'price'       => 'required|numeric|min:0|max:999999.99',
+            'category_id' => 'required|exists:categories,id',
+            'offer_id'    => 'nullable|exists:offers,id',
+        ]);
+
+        // PASO 2: Manejar la subida de la nueva imagen
+        if ($request->hasFile('image')) {
+            // Eliminar la imagen anterior del disco si existe
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            // Guardar la nueva imagen
+            $imagePath = $request->file('image')->store('products', 'public');
+            $validated['image'] = $imagePath;
+        }
+
+        // PASO 3: Actualizar el producto
+        $product->update($validated);
+
+        // PASO 4: Redirigir con mensaje
+        return redirect()->route('admin.products.index')
+            ->with('success', '¡Producto actualizado exitosamente!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un producto de la base de datos.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product): RedirectResponse
     {
-        return redirect()->route('products.index')
-            ->with('success', 'Producto eliminado exitosamente');
+        // PASO 1: Eliminar la imagen asociada del disco si existe
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        // PASO 2: Eliminar el registro de la BD
+        $product->delete();
+
+        // PASO 3: Redirigir
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Producto eliminado exitosamente.');
+    }
+
+    /**
+     * Muestra la lista de productos en el panel de administración.
+     */
+    public function adminIndex(): View
+    {
+        $products = Product::with(['category', 'offer'])
+            ->latest()
+            ->get();
+
+        return view('admin.products.index', compact('products'));
     }
 }

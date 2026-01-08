@@ -12,14 +12,10 @@ class Product extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'description',
+        'image', // Añadimos el campo de imagen
         'price',
         'category_id',
         'offer_id',
@@ -31,8 +27,24 @@ class Product extends Model
     protected function casts(): array
     {
         return [
-            'price' => 'decimal:2', // Convierte automáticamente el precio a decimal con 2 dígitos [cite: 446]
+            'price' => 'decimal:2',
         ];
+    }
+
+    /**
+     * Calculate the final price after applying offer discount.
+     */
+    protected function finalPrice(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->offer && $this->offer->discount_percentage > 0) {
+                    $discount = $this->price * ($this->offer->discount_percentage / 100);
+                    return round($this->price - $discount, 2);
+                }
+                return $this->price;
+            },
+        );
     }
 
     /**
@@ -40,7 +52,6 @@ class Product extends Model
      */
     public function category(): BelongsTo
     {
-        // Relación: Cada producto pertenece a una categoría [cite: 444]
         return $this->belongsTo(Category::class);
     }
 
@@ -49,35 +60,16 @@ class Product extends Model
      */
     public function offer(): BelongsTo
     {
-        // Relación: Cada producto puede tener una oferta (nullable) [cite: 444]
         return $this->belongsTo(Offer::class);
     }
 
     /**
-     * Get the users who have this product in their cart (N:M relationship).
+     * The users that have this product in their cart/wishlist.
      */
     public function users(): BelongsToMany
     {
-        // Relación N:M con usuarios a través de la tabla pivot product_user [cite: 445]
         return $this->belongsToMany(User::class, 'product_user')
-            ->withPivot('quantity') // Acceso al campo extra 'quantity'
+            ->withPivot('quantity')
             ->withTimestamps();
-    }
-
-    /**
-     * Get the product's final price after applying discounts.
-     */
-    protected function finalPrice(): Attribute
-    {
-        return Attribute::make(
-            get: function () {
-                // Calcula el precio final si existe una oferta activa [cite: 440-441]
-                if ($this->offer && $this->offer->discount_percentage > 0) {
-                    $discount = $this->price * ($this->offer->discount_percentage / 100);
-                    return round($this->price - $discount, 2);
-                }
-                return $this->price;
-            },
-        );
     }
 }
