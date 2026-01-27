@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class CartController extends Controller
 {
@@ -28,11 +28,12 @@ class CartController extends Controller
         // Esto nos permite usar $product->quantity en la vista fácilmente
         $cartProducts = $cartProducts->map(function ($product) use ($cart) {
             $product->quantity = $cart[$product->id]['quantity'];
+
             return $product;
         });
 
         return view('cart.index', [
-            'cartProducts' => $cartProducts
+            'cartProducts' => $cartProducts,
         ]);
     }
 
@@ -42,7 +43,7 @@ class CartController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'product_id' => 'required|exists:products,id'
+            'product_id' => 'required|exists:products,id',
         ]);
 
         $productId = $request->input('product_id');
@@ -56,7 +57,7 @@ class CartController extends Controller
         } else {
             // Si no está, lo añadimos con cantidad 1
             $cart[$productId] = [
-                "quantity" => 1
+                'quantity' => 1,
             ];
         }
 
@@ -72,7 +73,7 @@ class CartController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate([
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
         ]);
 
         $cart = session()->get('cart', []);
@@ -114,10 +115,73 @@ class CartController extends Controller
      */
     public function checkout(): RedirectResponse
     {
-        // Elimina la clave 'cart' de la sesión por completo
+        // 1. Si el usuario NO está logueado: Simulación con mensaje diferenciado
+        if (! auth()->check()) {
+            session()->forget('cart');
+
+            return redirect()->route('welcome')
+                ->with('success', 'Compra simulada (Usuario no registrado).');
+        }
+
+        // 2. Si el usuario ESTÁ logueado: Procesar pedido real
+        $cart = session()->get('cart', []);
+
+        if (empty($cart)) {
+            return redirect()->route('cart.index')
+                ->with('error', 'El carrito está vacío.');
+        }
+
+        // Obtener productos reales para asegurar precios y nombres actuales
+        $productIds = array_keys($cart);
+        $products = Product::find($productIds);
+
+        // Calcular total
+        $total = 0;
+        foreach ($products as $product) {
+            $quantity = $cart[$product->id]['quantity'];
+            // Aplicar lógica de oferta si existe (usando la lógica que ya podrías tener o el precio base)
+            // Aquí usaremos el precio base del producto. Si tuvieras ofertas calculadas, úsalas aquí.
+            $price = $product->price;
+            // Si el producto tiene oferta aplicada dinámicamente, deberías calcularla aquí.
+            // Asumiremos precio base por simplicidad o que el modelo Product tiene un método getFinalPriceAttribute
+            // Vamos a recalcular ofertas básico si el modelo tuviera relación
+            if ($product->offer) {
+                $price = $product->price - ($product->price * ($product->offer->discount_percentage / 100));
+            }
+
+            $total += $price * $quantity;
+        }
+
+        // Crear la Orden
+        $order = \App\Models\Order::create([
+            'user_id' => auth()->id(),
+            'total_price' => $total,
+            'status' => 'completed',
+        ]);
+
+        // Crear los Items de la Orden
+        foreach ($products as $product) {
+            $quantity = $cart[$product->id]['quantity'];
+
+            // Recalcular precio unitario para guardarlo en el histórico
+            $price = $product->price;
+            if ($product->offer) {
+                $price = $product->price - ($product->price * ($product->offer->discount_percentage / 100));
+            }
+
+            \App\Models\OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'product_name' => $product->name,
+                'price' => $price,
+                'quantity' => $quantity,
+            ]);
+        }
+
+        // Vaciar carrito
         session()->forget('cart');
 
         return redirect()->route('welcome')
-            ->with('success', '¡Pedido realizado con éxito! Gracias por tu compra.');
+            ->with('success', 'Pedido registrado correctamente.');
     }
 }

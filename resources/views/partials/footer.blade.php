@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             <div>
-                <h5 class="text-xl font-bold mb-4">🛍 Mi Tienda</h5>
+                <h5 class="text-xl font-bold mb-4">🛍 TechValencia</h5>
                 <p class="text-gray-400">
                     Tu tienda de confianza para encontrar los mejores productos.
                 </p>
@@ -38,15 +38,15 @@
             <div>
                 <h6 class="font-bold mb-4">Contacto</h6>
                 <ul class="space-y-2 text-gray-400">
-                    <li>📞 Teléfono de contacto</li>
-                    <li>📧 Email de contacto</li>
-                    <li>🕒 Horario de atención</li>
+                    <li>📞 +34 968686868</li>
+                    <li>📧 techvalencia@hotmail.com</li>
+                    <li>🕒 L-V 9:00 - 21:00</li>
                 </ul>
             </div>
         </div>
 
         <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2025 Mi Tienda. Todos los derechos reservados.</p>
+            <p>© 2025 TechValencia. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>

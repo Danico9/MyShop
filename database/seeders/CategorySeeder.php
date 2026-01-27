@@ -1,11 +1,15 @@
 <?php
+
 namespace Database\Seeders;
+
 use App\Models\Category;
 use App\Traits\LoadsMockData;
 use Illuminate\Database\Seeder;
+
 class CategorySeeder extends Seeder
 {
     use LoadsMockData;
+
     /**
      * Run the database seeds.
      */

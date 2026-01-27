@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Auth; // Solución para Intelephense
+
+// Solución para Intelephense
 
 class WishlistController extends Controller
 {
@@ -22,7 +24,7 @@ class WishlistController extends Controller
             ->get();
 
         return view('admin.wishlist.index', [
-            'wishlistProducts' => $wishlistProducts
+            'wishlistProducts' => $wishlistProducts,
         ]);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+
 trait LoadsMockData
 {
     /**
@@ -22,7 +23,6 @@ trait LoadsMockData
     /**
      * Load products from mock file
      **/
-
     protected function getProducts(): array
     {
         return require database_path('data/mock-products.php');

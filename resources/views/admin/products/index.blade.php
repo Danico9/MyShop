@@ -6,7 +6,7 @@
             </h2>
 
             <a href="{{ route('admin.products.create') }}"
-               class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+               class="inline-flex items-center px-4 py-2 bg-indigo-600 text-black rounded-md hover:bg-indigo-700">
                 Crear Nuevo Producto
             </a>
         </div>

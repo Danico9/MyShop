@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Bienvenido - Mi Tienda')
+@section('title', 'Bienvenido - TechValencia')
 
 @push('styles')
 <style>
@@ -14,7 +14,7 @@
 <section class="hero-gradient text-white py-20">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-            Bienvenido a Mi Tienda
+            Bienvenido a TechValencia
         </h2>
 
         <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">

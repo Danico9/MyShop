@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Todos los Productos - Mi Tienda')
+@section('title', 'Todos los Productos - TechValencia')
 
 @push('styles')
 <style>

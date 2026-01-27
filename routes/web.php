@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\WishlistController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,12 @@ use App\Http\Controllers\CartController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Contact page
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+// Route::get('/contact', function () {                                                                                                                                                                                                                                                                     ││
+//     return view('contact');                                                                                                                                                                                                                                                                              │ │
+// })->name('contact');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Rutas de categorías (solo lectura)
 Route::resource('categories', CategoryController::class)
@@ -33,7 +37,7 @@ Route::resource('categories', CategoryController::class)
 
 // Rutas de productos (solo lectura)
 Route::get('/products-on-sale', [ProductController::class, 'onSale'])
-    ->name('products.on-sale'); // <--- Aquí estaba el error corregido
+    ->name('products.on-sale');
 
 Route::resource('products', ProductController::class)
     ->only(['index', 'show']);
@@ -58,7 +62,6 @@ Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update')
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy'); // Eliminar un producto
 Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');  // Finalizar compra (vaciar)
 
-
 // ===========================================
 // RUTAS DE USUARIO AUTENTICADO (Breeze)
 // ===========================================
@@ -69,18 +72,21 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Mis Pedidos
+    Route::get('/my-orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    Route::delete('/my-orders/{id}', [\App\Http\Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
+
     // Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 // ===========================================
 // RUTAS DE ADMINISTRACIÓN (Protegidas)
 // ===========================================
 
-//Route::middleware('auth')
+// Route::middleware('auth')
 //    ->prefix('admin')    // Todas las URLs empezarán por /admin/...
 //    ->name('admin.')     // Todos los nombres de ruta empezarán por admin....
 //    ->group(function () {
@@ -125,6 +131,19 @@ Route::middleware(['auth', 'log.activity'])
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
         Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
         Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    });
+
+// Rutas de Super Admin (requiere rol de admin)
+Route::middleware(['auth', 'log.activity', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/contact-messages', [ContactController::class, 'adminIndex'])->name('contact.index');
+        Route::delete('/contact-messages/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+
+        // Rutas de Pedidos
+        Route::get('/orders', [\App\Http\Controllers\AdminOrderController::class, 'index'])->name('orders.index');
+        Route::delete('/orders/{id}', [\App\Http\Controllers\AdminOrderController::class, 'destroy'])->name('orders.destroy');
     });
 
 // Las rutas de autenticación (login, register, etc.) se incluyen desde aquí

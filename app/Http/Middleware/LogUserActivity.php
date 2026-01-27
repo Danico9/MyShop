@@ -22,11 +22,11 @@ class LogUserActivity
         // 2. Si el usuario está autenticado, registrar su actividad después
         if (auth()->check()) {
             Log::info('Actividad de usuario', [
-                'user_id'   => auth()->id(),
+                'user_id' => auth()->id(),
                 'user_name' => auth()->user()->name,
-                'method'    => $request->method(),
-                'url'       => $request->fullUrl(),
-                'ip'        => $request->ip(),
+                'method' => $request->method(),
+                'url' => $request->fullUrl(),
+                'ip' => $request->ip(),
             ]);
         }
 

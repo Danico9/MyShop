@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class OfferController extends Controller
@@ -15,6 +14,7 @@ class OfferController extends Controller
     {
         // Eloquent: Obtener todas las ofertas
         $offers = Offer::all();
+
         return view('offers.index', compact('offers'));
     }
 
@@ -23,13 +23,13 @@ class OfferController extends Controller
      */
     public function show(string $id): View
     {
-        if (!is_numeric($id) || $id < 1) {
+        if (! is_numeric($id) || $id < 1) {
             abort(404, 'ID de oferta inválido');
         }
 
         $offer = Offer::find($id);
 
-        if (!$offer) {
+        if (! $offer) {
             abort(404, 'Oferta no encontrada');
         }
 

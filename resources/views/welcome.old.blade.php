@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda Online</title>
+    <title>TechValencia Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,7 +35,7 @@
             <!-- Logo -->
             <div class="flex items-center space-x-4">
                 <a href="/" class="text-2xl font-bold text-primary-600
-hover:text-primary-700 transition">🛍 Mi Tienda</a>
+hover:text-primary-700 transition">🛍 TechValencia</a>
             </div>
             <!-- Navegación desktop -->
             <nav class="hidden lg:flex space-x-8">
@@ -126,7 +126,7 @@ transition text-left">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-
 6">
-            Bienvenido a Mi Tienda
+            Bienvenido a TechValencia
         </h2>
         <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mxauto">
             Descubre una amplia variedad de productos de calidad.
@@ -281,7 +281,7 @@ py-2 rounded-lg hover:bg-primary-700 transition">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-                <h5 class="text-xl font-bold mb-4">🛍 Mi Tienda</h5>
+                <h5 class="text-xl font-bold mb-4">🛍 TechValencia</h5>
                 <p class="text-gray-400">
                     Tu tienda de confianza para encontrar los mejores
                     productos.
@@ -323,7 +323,7 @@ transition">🐦 Twitter</a>
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center textgray-
 400">
-            <p>© 2025 Mi Tienda. Todos los derechos reservados.</p>
+            <p>© 2025 TechValencia. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    use HasFactory;
 
     // Campos que permitimos asignar masivamente (coinciden con la migración)
     protected $fillable = [
@@ -20,6 +19,7 @@ class Category extends Model
     /**
      * Get the products for the category.
      */
+    /** @return HasMany<Product, Category> */
     public function products(): HasMany
     {
         // Relación 1:N -> Una categoría tiene muchos productos

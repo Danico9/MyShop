@@ -14,9 +14,8 @@ class CategoryCard extends Component
      */
     public function __construct(
         public Category $category,
-        public string   $class = ''
-    )
-    {
+        public string $class = ''
+    ) {
     }
 
     /**

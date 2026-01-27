@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Product;
 use App\Models\Category;
 use App\Models\Offer;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -19,6 +19,7 @@ class ProductController extends Controller
     {
         // Eloquent: Obtenemos todos los productos con sus relaciones
         $products = Product::with(['category', 'offer'])->get();
+
         return view('products.index', compact('products'));
     }
 
@@ -55,25 +56,25 @@ class ProductController extends Controller
     {
         // PASO 1: Validar todos los datos del formulario
         $validated = $request->validate([
-            'name'        => 'required|string|max:255|unique:products,name',
+            'name' => 'required|string|max:255|unique:products,name',
             'description' => 'required|string|max:1000',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Máx 2MB
-            'price'       => 'required|numeric|min:0|max:999999.99',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Máx 2MB
+            'price' => 'required|numeric|min:0|max:999999.99',
             'category_id' => 'required|exists:categories,id',
-            'offer_id'    => 'nullable|exists:offers,id',
+            'offer_id' => 'nullable|exists:offers,id',
         ], [
             // Mensajes de error personalizados
-            'name.required'        => 'El nombre del producto es obligatorio.',
-            'name.unique'          => 'Ya existe un producto con ese nombre.',
+            'name.required' => 'El nombre del producto es obligatorio.',
+            'name.unique' => 'Ya existe un producto con ese nombre.',
             'description.required' => 'La descripción es obligatoria.',
-            'image.image'          => 'El archivo debe ser una imagen.',
-            'image.mimes'          => 'La imagen debe ser de tipo: jpeg, png, jpg, webp.',
-            'image.max'            => 'La imagen no debe superar los 2MB.',
-            'price.required'       => 'El precio es obligatorio.',
-            'price.numeric'        => 'El precio debe ser un número.',
+            'image.image' => 'El archivo debe ser una imagen.',
+            'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg, webp.',
+            'image.max' => 'La imagen no debe superar los 2MB.',
+            'price.required' => 'El precio es obligatorio.',
+            'price.numeric' => 'El precio debe ser un número.',
             'category_id.required' => 'Debes seleccionar una categoría.',
-            'category_id.exists'   => 'La categoría seleccionada no es válida.',
-            'offer_id.exists'      => 'La oferta seleccionada no es válida.',
+            'category_id.exists' => 'La categoría seleccionada no es válida.',
+            'offer_id.exists' => 'La oferta seleccionada no es válida.',
         ]);
 
         // PASO 2: Procesar la imagen si fue subida
@@ -101,14 +102,14 @@ class ProductController extends Controller
     public function show(string $id): View
     {
         // Validar formato ID
-        if (!is_numeric($id) || $id < 1) {
+        if (! is_numeric($id) || $id < 1) {
             abort(404, 'ID de producto inválido');
         }
 
         // Eloquent: Buscar por ID incluyendo categoría y oferta
         $product = Product::with(['category', 'offer'])->find($id);
 
-        if (!$product) {
+        if (! $product) {
             abort(404, 'Producto no encontrado');
         }
 
@@ -136,12 +137,12 @@ class ProductController extends Controller
         // PASO 1: Validar los datos del formulario
         $validated = $request->validate([
             // unique:products,name,ID -> Ignora el ID actual para evitar falso error de duplicado
-            'name'        => 'required|string|max:255|unique:products,name,' . $product->id,
+            'name' => 'required|string|max:255|unique:products,name,' . $product->id,
             'description' => 'required|string|max:1000',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'price'       => 'required|numeric|min:0|max:999999.99',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'price' => 'required|numeric|min:0|max:999999.99',
             'category_id' => 'required|exists:categories,id',
-            'offer_id'    => 'nullable|exists:offers,id',
+            'offer_id' => 'nullable|exists:offers,id',
         ]);
 
         // PASO 2: Manejar la subida de la nueva imagen

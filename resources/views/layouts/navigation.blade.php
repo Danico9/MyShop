@@ -12,12 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Tienda') }}
                     </x-nav-link>
-
+                    @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                        {{ __('Mis Pedidos') }}
                     </x-nav-link>
 
                     {{-- Enlaces de Administración --}}
@@ -30,11 +35,25 @@
                                 :active="request()->routeIs('admin.wishlist.*')">
                         {{ __('❤️ Lista de Deseos') }}
                     </x-nav-link>
+
+                    @if(Auth::check() && Auth::user()->is_admin)
+                        <x-nav-link :href="route('admin.contact.index')"
+                                    :active="request()->routeIs('admin.contact.*')">
+                            {{ __('Mensajes') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.orders.index')"
+                                    :active="request()->routeIs('admin.orders.*')">
+                            {{ __('Pedidos') }}
+                        </x-nav-link>
+                    @endif
+                    @endauth
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700">
@@ -63,6 +82,12 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                @else
+                <div class="space-x-4">
+                    <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">Log in</a>
+                    <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900 underline">Register</a>
+                </div>
+                @endauth
             </div>
 
             <!-- Hamburger -->
@@ -93,6 +118,10 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                {{ __('Mis Pedidos') }}
+            </x-responsive-nav-link>
+
             {{-- Enlaces de Administración --}}
             <x-responsive-nav-link :href="route('admin.products.index')"
                                    :active="request()->routeIs('admin.products.*')">
@@ -103,10 +132,23 @@
                                    :active="request()->routeIs('admin.wishlist.*')">
                 {{ __('❤️ Lista de Deseos') }}
             </x-responsive-nav-link>
+
+            @if(Auth::check() && Auth::user()->is_admin)
+                <x-responsive-nav-link :href="route('admin.contact.index')"
+                                       :active="request()->routeIs('admin.contact.*')">
+                    {{ __('Mensajes') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('admin.orders.index')"
+                                       :active="request()->routeIs('admin.orders.*')">
+                    {{ __('Pedidos') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            @auth
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">
                     {{ Auth::user()->name }}
@@ -115,6 +157,7 @@
                     {{ Auth::user()->email }}
                 </div>
             </div>
+            @endauth
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">

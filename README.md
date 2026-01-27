@@ -1,294 +1,221 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto MyShop - Tienda Online con Laravel 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripción del Proyecto
+TechValencia es una aplicación web de comercio electrónico completa que he desarrollado utilizando el framework Laravel 12. El objetivo del proyecto es simular el funcionamiento real de una tienda online, gestionando desde el catálogo de productos hasta la tramitación de pedidos y su administración.
 
-## About Laravel
+El sistema está diseñado con una arquitectura MVC y cuenta con un sistema de roles robusto que diferencia claramente entre clientes y administradores, permitiendo funcionalidades específicas para cada uno, como un panel de gestión privado o un historial de pedidos personal.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologías Utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Para el desarrollo he utilizado las siguientes herramientas y versiones:
 
-## Learning Laravel
+*   **Backend:** Laravel 12 (PHP 8.4+)
+*   **Frontend:** Blade Templates con Tailwind CSS para el diseño.
+*   **Base de Datos:** MySQL
+*   **Entorno:** Docker a través de Laravel Sail (para asegurar que funcione igual en cualquier máquina).
+*   **Autenticación:** Laravel Breeze.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Instrucciones de Instalación
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Como instalar el proyecto en otro pc:
 
-### Premium Partners
+### PARTE 1: Preparar la infraestructura
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+#### 1. Instalar WSL2 y Ubuntu (En PowerShell como Admin)
 
-## Contributing
+Debes habilitar el subsistema de Linux y descargar Ubuntu.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   Ejecuta: `wsl --install -d Ubuntu-24.04`.
 
-## Code of Conduct
+-   Reinicia el equipo. Al volver, crea tu usuario y contraseña de Linux.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+#### 2. Instalar Docker Desktop (En Windows)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   Descarga e instala Docker Desktop. Asegúrate de marcar la opción **"Use WSL 2 based engine"** durante la instalación.
 
-## License
+-   Abre Docker Desktop, ve a **Settings > Resources > WSL Integration** y activa el interruptor de **Ubuntu-24.04**.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+#### 3. Instalar Visual Studio Code (En Windows)
 
+-   Instala VS Code y luego instala la extensión oficial **WSL** para conectar el editor con Ubuntu.
 
-### Modificaicones
 
-Usuario: danic/admin
+-   Una vez dentro de VS Code conectado a WSL, instala las extensiones recomendadas: _Laravel Extra Intellisense, PHP Intelephense, Laravel Blade Snippets_, etc. .
 
-\\wsl$\Ubuntu-24.04\home\danic\development\laravel\MyShop
 
+#### 4. Instalar herramientas base (Dentro de la terminal de Ubuntu)
 
-# Mientras se esta desarrollando con la consola abierta para que lo haga automaticamente
-sail npm run dev
+Abre tu terminal de Ubuntu (el ubuntu24 que acabamos de instalar danic/admin) y ejecuta lo siguiente para tener PHP y Composer (necesarios para instalar las librerías de tu proyecto antes de que arranque Sail):
 
-# Cuando termina, aunque estaba haciendose de forma automatica, hay que hacerlo para que se guarde los cambios
-Ctrl + C
-sail npm run build
+-   Actualiza el sistema: `sudo apt update && sudo apt upgrade -y`.
 
-# Durante el desarrollo se utiliza sail npm run dev.
+-   Instala utilidades: `sudo apt install -y curl wget unzip build-essential`.
 
-# Compila una sola vez
-# Genera los archivos finales en public/build
-# Antes de la entrega o despliegue, se ejecuta sail npm run build.
+-   Añade el repositorio de PHP: `sudo add-apt-repository ppa:ondrej/php -y` y `sudo apt update`.
 
-## Iniciar los contenedores
-sail up -d
+-   Instala PHP 8.4: `sudo apt install -y php8.4-cli php8.4-common php8.4-curl php8.4-mbstring php8.4-xml php8.4-mysql`.
 
-## Levantanr los contenedores de docker (asegurarme de que tengo que entrar antes a XAMPP para pararlo y de esta forma no me ocupe los mismos puertos y me de error):
-sail up -d --build
+-   Instala Composer:
 
-# Entrar a localhost:
-http://localhost/
+    Bash
 
+    ```
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+    
+    ```
 
-## Reiniciar/resetear la base de datos (migraciones + seeders)
-sail artisan migrate:refresh --seed
-
-
-## Actualizar estructura + datos SIN borrar tablas
-sail artisan migrate
-sail artisan db:seed
-
-
-
-
-# **Como funciona todo:**
-
-# Arquitectura de Desarrollo en Laravel Sail: ¿Cómo funciona la "Magia"?
-
-Este documento explica el flujo de trabajo interno de nuestro entorno de desarrollo. Si alguna vez te has preguntado por qué los cambios en el código se reflejan instantáneamente en el navegador sin necesidad de compilar o reiniciar el servidor, la respuesta radica en la sinergia de tres tecnologías: **Docker (Volúmenes)**, **PHP (Intérprete)** y **Vite (HMR)**.
-
-## 1. El Cimiento: Docker Volumes (El "Espejo")
-
-Aunque el servidor se ejecuta dentro de un contenedor (una "mini máquina virtual" de Linux), Docker utiliza una funcionalidad crítica llamada **Bind Mounts** (Volúmenes).
-
-### ¿Cómo funciona?
-
-Docker crea un vínculo en tiempo real entre tu sistema operativo (Host) y el contenedor.
-
--   **Tu entorno:** La carpeta del proyecto en Windows/Linux.
-
--   **Entorno Docker:** La carpeta `/var/www/html` dentro del contenedor.
-
-
-> **Analogía:** Imagina que tienes dos puertas para entrar a la misma habitación. Si tiras un papel al suelo entrando por la Puerta A (Tu Windows), cualquiera que entre por la Puerta B (Docker) verá ese papel inmediatamente. **No son copias, es el mismo archivo físico en el disco.**
-
-**Resultado:** Latencia cero. El contenedor "ve" el archivo modificado en el mismo milisegundo en que guardas en VS Code.
-
-----------
-
-## 2. El Motor: PHP (Lenguaje Interpretado)
-
-A diferencia de lenguajes compilados como Java, C++ o C# (que requieren transformar el código a binario/exe y reiniciar el proceso), PHP es un lenguaje **interpretado**.
-
-### El Ciclo de Vida de una Petición (Request Lifecycle)
-
-PHP opera bajo un modelo de "Morir en cada petición":
-
-1.  El navegador solicita una página.
-
-2.  PHP lee el archivo `.php` del disco **en ese preciso instante**.
-
-3.  Procesa el código, genera HTML y lo envía.
-
-4.  El proceso se cierra y limpia la memoria.
-
-
-**Resultado:** Como Docker (punto 1) ya actualizó el archivo al instante, cuando refrescas el navegador, PHP lee y ejecuta el código nuevo. No hace falta "reconstruir" nada.
-
-----------
-
-## 3. La Automatización: Vite (El "Vigilante")
-
-Aquí es donde entra el **HMR (Hot Module Replacement)**. Para evitar que tengas que pulsar `F5` manualmente, usamos Vite (`npm run dev`).
-
-### Componentes de Vite:
-
-1.  **File Watcher:** Un proceso en Node.js que vigila tus carpetas. Si detecta un cambio en la fecha de modificación de un archivo, activa una alerta.
-
-2.  **WebSockets:** Inyecta un pequeño script invisible en tu navegador que mantiene un canal de comunicación abierto con el servidor de desarrollo.
-
-
-### Flujo de Actualización Automática
-
--   **Cambios en CSS:** Vite inyecta el nuevo estilo directamente sin recargar (el color cambia al instante).
-
--   **Cambios en PHP/Blade:** Vite detecta el cambio estructural y envía la señal `window.location.reload()` al navegador.
 
 
 ----------
 
-## Resumen del Flujo de Trabajo
+### PARTE 2: Clonar desde GitHub
 
-Cuando presionas `Ctrl + S` en tu editor, ocurre esta reacción en cadena:
+En lugar de crear un proyecto nuevo, vamos a clonar el que tenemos.
 
-1.  **Editor:** Guarda el archivo en tu disco duro físico.
+#### 1. Clonar el repositorio
 
-2.  **Docker:** El cambio es visible inmediatamente dentro del contenedor Linux gracias a los _Volúmenes_.
+En la terminal de Ubuntu:
 
-3.  **Vite:** El _Watcher_ detecta el cambio y envía un mensaje por _WebSocket_ al navegador.
+Bash
 
-4.  **Navegador:** Recibe la orden y recarga la página.
+```
+cd ~
+mkdir -p development/laravel
+cd development/laravel
+git clone https://github.com/Danico9/MyShop
+cd MyShop
 
-5.  **PHP:** Lee el código fresco del disco y sirve la nueva versión.
+```
+
+
+#### 2. Instalar dependencias de PHP (Vendor)
+
+Como la carpeta `vendor` no se sube a GitHub, Sail no existe todavía en este dispositivo. Debes instalarlo:
+
+Bash
+
+```
+composer install
+
+```
+
+## Para ir a la ruta de forma manual
+`\\wsl$\Ubuntu-24.04\home\[tu_usuario]\development\laravel\[nombre_proyecto]` _(Asegúrate de cambiar `[tu_usuario]` por tu usuario de Linux y `[nombre_proyecto]` por el nombre de tu carpeta)._
+
+_Nota: Esto usará el PHP y Composer que se instalo en la Parte 1._
+
+#### 3. Configurar el entorno (.env)
+
+El archivo de configuración tampoco viaja en GitHub.
+
+-   Copia el ejemplo: `cp .env.example .env`.
+
+-   **Importante:** Edita el archivo `.env` (`nano .env`) y asegúrate de que la configuración de base de datos coincide con la del PDF:
+
+    -   `DB_HOST=mysql`
+
+    -   `DB_USERNAME=sail`
+
+    -   `DB_PASSWORD=password` .
+
+
+
+#### 4. Arrancar Sail y Generar Key
+
+-   Si quieres usar el comando corto `sail`, configura el alias: `echo "alias sail='./vendor/bin/sail'" >> ~/.bashrc` y luego `source ~/.bashrc`.
+
+-   Levanta los contenedores: `sail up -d --build`.
+
+-   Genera la clave de encriptación de la app: `sail artisan key:generate`.
+
+
+#### 5. Configurar la Base de Datos (Manual)
+
+Para crear la base de datos y dar permisos. Si no lo haces, la migración fallará.
+
+1.  Entra a MySQL: `docker exec -it myshop-mysql-1 mysql -u root -ppassword`.
+
+Verificamos que estamos con el usuario root: `SELECT USER();`
+
+2.  Crea la base de datos: `CREATE DATABASE IF NOT EXISTS myshop;` (o el nombre que uses).
+
+3.  Da permisos al usuario sail: `GRANT ALL PRIVILEGES ON myshop.* TO 'sail'@'%';`.
+
+4.  Aplica cambios: `FLUSH PRIVILEGES;` y sal con `exit`.
+
+
+
+#### 6. Migraciones y Frontend
+
+Para terminar, llena la base de datos y compila los estilos.
+
+-   Ejecuta migraciones: `sail artisan migrate:refresh --seed`.
+
+-   Instala dependencias de Node: `sail npm install`.
+
+-   Compila los estilos: `sail npm run build`.
 
 
 ----------
 
-## Guía de Comandos: `up` vs `up --build`
-
-Es vital entender la diferencia para optimizar tiempos de desarrollo.
-
-### `sail up -d` (El habitual)
-
--   **Uso:** 99% de las veces.
-
--   **Acción:** Enciende los contenedores existentes.
-
--   **Velocidad:** Muy rápida.
-
--   **Cuándo usarlo:** Para empezar a trabajar, cambios de código (rutas, controladores, vistas).
+**Siguiente paso:** Una vez se realizan estos pasos, se va al navegador en Windows y entra a `http://localhost`. Deberías ver tu proyecto funcionando exactamente igual que en el otro portátil
 
 
-### `sail up -d --build` (Mantenimiento)
+---
 
--   **Uso:** Solo cuando cambias la infraestructura.
+## Usuarios y Roles (Sistema de Permisos)
 
--   **Acción:** Destruye los contenedores viejos y construye nuevos basándose en cambios del `Dockerfile`.
+He implementado un control de acceso basado en un campo `is_admin` en la tabla de usuarios. Esto me permite proteger ciertas rutas mediante un Middleware personalizado.
 
--   **Velocidad:** Lenta.
+### 1. Administradores (`is_admin = 1`)
 
--   **Cuándo usarlo:**
+Tienen acceso total al sistema, incluyendo el panel `/admin`.
+*   **Usuario Principal:** `admin@tienda.com` / `password`
+*   **Usuario Demo:** `demo@example.com` / `password`
+*   **Permisos:** Crear/Editar/Eliminar productos, ver todos los pedidos de la tienda, gestionar mensajes de contacto.
 
-    -   Instalar una nueva extensión de PHP.
+### 2. Clientes / Usuarios Normales (`is_admin = 0`)
 
-    -   Cambiar la versión de MySQL o PHP.
+Solo tienen acceso a la parte pública y a su área privada.
+*   **Usuario de Prueba:** `tu@email.com` / `password`
+*   **Permisos:** Comprar productos, ver su historial personal "Mis Pedidos", editar su perfil.
 
-    -   Modificar el archivo `docker-compose.yml`.
+---
 
+## Funcionalidades Implementadas
 
-----------
+### Carrito de Compras (Lógica Dual)
 
-**Nota:** La única vez que necesitas ejecutar un comando manual extra tras guardar código es si modificas la estructura de la Base de Datos (migraciones), donde requerirás `sail artisan migrate`.
+He programado el carrito para que se comporte diferente según el usuario:
+*   **Invitados:** El carrito se guarda en la sesión (`Session`). Al intentar finalizar compra, el sistema avisa de que es una simulación y no guarda nada en la BBDD.
+*   **Usuarios Registrados:** El carrito también es persistente, pero al finalizar la compra, se genera un registro real en las tablas `orders` y `order_items`.
 
+### Gestión de Pedidos
+*   **Para el Cliente:** He creado una sección "Mis Pedidos" donde el usuario ve solo sus compras. Esto se filtra mediante `where('user_id', auth()->id())` para garantizar la privacidad.
+*   **Para el Admin:** Un panel global donde se visualizan todas las ventas de la tienda, con detalles de quién compró, qué productos y el total.
 
-# Cuando usar o no los comandos:
+### Sistema de Contacto
 
-Para entender por qué no necesitas ejecutar comandos constantemente, debemos distinguir entre **Infraestructura** (el servidor) y **Código Fuente** (tu aplicación).
+El formulario de contacto no solo envía emails (simulado), sino que guarda los mensajes en una tabla `contact_messages`. Los administradores pueden leer y borrar estos mensajes desde su panel.
 
-Aquí tienes la explicación técnica estricta:
+### Seguridad
 
-### 1. El concepto de "Proceso en Ejecución" (Daemon)
+He creado un Middleware llamado `AdminMiddleware`. Este actúa de barrera: si un usuario intenta entrar a una ruta `/admin` y no tiene el rol correcto, el sistema lo bloquea automáticamente (Error 403), independientemente de si conoce la URL.
 
-Cuando ejecutas `sail up -d`, estás iniciando procesos de servidor (Nginx, PHP-FPM, MySQL) que se quedan **residentes en la memoria RAM**. Estos procesos están en un bucle infinito esperando peticiones HTTP.
+---
 
--   **Estado:** El servidor está "encendido" (Running).
+## Estructura de Base de Datos (Tablas Clave)
 
--   **Comportamiento:** No carga tu código en memoria de forma permanente. Simplemente espera una petición.
-
-
-Si vuelves a ejecutar `sail up -d` cuando ya está corriendo, Docker detecta que los contenedores ya están en estado "Running" y no hace nada. Sería un comando redundante.
-
-### 2. Diferencia entre "Tiempo de Construcción" y "Tiempo de Ejecución"
-
-Aquí está la clave de tu duda.
-
-#### A. Infraestructura (Build Time / Tiempo de Construcción)
-
--   **Comando:** `sail up -d --build`
-
--   **Qué altera:** El sistema operativo del contenedor.
-
--   **Explicación:** Imagina que tu servidor Linux necesita tener instalada la librería `gd` para procesar imágenes. Eso es software del sistema, no código tuyo. Si modificas el archivo `Dockerfile` para añadir esa librería, necesitas "reconstruir" la imagen del sistema operativo.
-
--   **Frecuencia:** Muy baja (una vez al mes, o al iniciar el proyecto).
-
-
-#### B. Código de Aplicación (Runtime / Tiempo de Ejecución)
-
--   **Acción:** Guardar un archivo `.php` o `.js`.
-
--   **Qué altera:** Un archivo de texto en el disco duro.
-
--   **Explicación:** Cuando llega una petición al servidor (que ya está corriendo desde el paso 1), el servidor lee el archivo de texto **en ese preciso instante**.
-
-    -   Si cambias el código, el archivo en el disco cambia.
-
-    -   La siguiente vez que el servidor lea el disco (cuando recargas la página), leerá el texto nuevo.
-
--   **Frecuencia:** Constante (cada minuto mientras programas).
-
-### Tabla Técnica de Decisiones
-
-Esta tabla resume exactamente cuándo debes interactuar con la terminal y cuándo no.
-
-| Tipo de Cambio        | Ejemplo                                                     | ¿Requiere comando Sail?        | Razón Técnica                                                                 |
-|----------------------|-------------------------------------------------------------|--------------------------------|--------------------------------------------------------------------------------|
-| Lógica de Código     | Cambiar un if, una variable, una vista HTML, una ruta.      | NO                             | PHP interpreta el archivo desde el disco en cada petición. El cambio ya está ahí. |
-| Estilos / Frontend   | Cambiar CSS, Vue, React, JS.                                | NO                             | Vite detecta el cambio de archivo y lo inyecta al navegador (HMR).             |
-| Datos                | Insertar un usuario manualmente en la DB.                  | NO                             | La base de datos es un servicio persistente; los datos se guardan al instante. |
-| Estructura de BD     | Crear una nueva tabla o columna (Migration).               | SÍ (artisan migrate)           | Necesitas ejecutar un script específico para alterar el esquema de la base de datos. |
-| Configuración PHP    | Instalar una extensión de PHP (ej. Redis, Imagick).        | SÍ (up --build)                | Estás cambiando los binarios del servidor, necesitas recompilar el contenedor. |
-| Dependencias         | Instalar una librería nueva (composer require ...).        | A VECES (sail up)              | Solo si la librería requiere reiniciar el servicio para ser detectada (raro en PHP moderno). |
-
-
-
-### Resumen del Flujo Técnico
-
-1.  **Inicio de la jornada:** Ejecutas `sail up -d`. Esto asigna recursos de CPU y RAM y levanta los servicios (PHP, MySQL). **El servidor pasa a estado ACTIVO.**
-
-2.  **Desarrollo:** Editas archivos. Gracias al montaje de volúmenes del sistema de archivos, el proceso ACTIVO de PHP tiene acceso directo a tus ediciones. No necesitas reiniciar el proceso para que "vea" los archivos, porque los lee bajo demanda.
-
-3.  **Fin de la jornada:** Ejecutas `sail stop` para liberar la RAM de tu ordenador.
-
-
-**Conclusión:** Solo tocas la terminal para gestionar el **ciclo de vida del servidor** (encender/apagar) o para cambiar su **arquitectura** (instalar software base). Para programar, el servidor simplemente "sirve" lo que tú guardas.
+*   **`users`**: Tabla estándar de Laravel modificada con la columna `is_admin`.
+*   **`products`**: Contiene la información del catálogo (precio, descripción, ruta de imagen).
+*   **`orders`**: Almacena la cabecera del pedido (ID usuario, precio total, estado).
+*   **`order_items`**: Tabla pivote que guarda qué productos había en cada pedido y el precio que tenían en ese momento (snapshot).
+*   **`contact_messages`**: Almacenamiento persistente de las dudas de los usuarios.

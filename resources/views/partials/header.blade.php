@@ -4,7 +4,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <a href="{{ route('welcome') }}" class="text-2xl font-bold text-primary-600">
-                    🛍️ Mi Tienda
+                    🛍️ TechValencia
                 </a>
             </div>
 

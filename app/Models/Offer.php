@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Offer extends Model
 {
-    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'slug',
@@ -25,6 +19,7 @@ class Offer extends Model
     /**
      * Get the products that have this offer.
      */
+    /** @return HasMany<Product, Offer> */
     public function products(): HasMany
     {
         // Relación 1:N - Una oferta puede aplicarse a muchos productos

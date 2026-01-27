@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', $product->name . ' - Mi Tienda')
+@section('title', $product->name . ' - TechValencia')
 
 @section('content')
 <div class="container mx-auto px-6 py-8">
@@ -8,7 +8,8 @@
 
         <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="h-96 bg-gray-200 flex items-center justify-center">
-                <span class="text-8xl">📦</span>
+                <!-- <span class="text-8xl">📦</span> -->
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
             </div>
         </div>
 

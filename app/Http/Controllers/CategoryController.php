@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -15,6 +14,7 @@ class CategoryController extends Controller
     {
         // Eloquent: Obtener todas las categorías
         $categories = Category::all();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -23,13 +23,13 @@ class CategoryController extends Controller
      */
     public function show(string $id): View
     {
-        if (!is_numeric($id) || $id < 1) {
+        if (! is_numeric($id) || $id < 1) {
             abort(404, 'ID de categoría inválido');
         }
 
         $category = Category::find($id);
 
-        if (!$category) {
+        if (! $category) {
             abort(404, 'Categoría no encontrada');
         }
 
