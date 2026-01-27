@@ -13,7 +13,7 @@ Para el desarrollo he utilizado las siguientes herramientas y versiones:
 
 *   **Backend:** Laravel 12 (PHP 8.4+)
 *   **Frontend:** Blade Templates con Tailwind CSS para el diseño.
-*   **Base de Datos:** MySQL
+*   **Base de Datos:** MySQL 8.0
 *   **Entorno:** Docker a través de Laravel Sail (para asegurar que funcione igual en cualquier máquina).
 *   **Autenticación:** Laravel Breeze.
 
@@ -219,3 +219,13 @@ He creado un Middleware llamado `AdminMiddleware`. Este actúa de barrera: si un
 *   **`orders`**: Almacena la cabecera del pedido (ID usuario, precio total, estado).
 *   **`order_items`**: Tabla pivote que guarda qué productos había en cada pedido y el precio que tenían en ese momento (snapshot).
 *   **`contact_messages`**: Almacenamiento persistente de las dudas de los usuarios.
+
+
+## Autor
+
+**Daniel**
+
+Estudiante de 2º DAW Semipresencial - IES Juan de Garay, Valencia
+
+- GitHub: https://github.com/Danico9/MyShop
+- Email: dancisbla@alu.edu.gva.es
