@@ -7,22 +7,28 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Ejecuta la migración.
+     *
+     * Crea la tabla 'contact_messages' para almacenar los mensajes
+     * enviados desde el formulario de contacto.
      */
     public function up(): void
     {
         Schema::create('contact_messages', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('subject');
-            $table->text('message');
-            $table->timestamps();
+            $table->id();          // ID autoincremental de cada mensaje
+            $table->string('name');    // Nombre del remitente
+            $table->string('email');   // Correo electrónico del remitente
+            $table->string('subject'); // Asunto del mensaje
+            $table->text('message');   // Contenido del mensaje
+            $table->timestamps();      // created_at y updated_at automáticos
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Revierte la migración.
+     *
+     * Elimina la tabla 'contact_messages' si existe, deshaciendo
+     * los cambios realizados por el método up().
      */
     public function down(): void
     {

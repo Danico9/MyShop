@@ -202,13 +202,30 @@ He programado el carrito para que se comporte diferente según el usuario:
 *   **Para el Cliente:** He creado una sección "Mis Pedidos" donde el usuario ve solo sus compras. Esto se filtra mediante `where('user_id', auth()->id())` para garantizar la privacidad.
 *   **Para el Admin:** Un panel global donde se visualizan todas las ventas de la tienda, con detalles de quién compró, qué productos y el total.
 
+Mejoras por realizar:
+- Habría que añadir una opción para poder editar los pedidos si fuera necesario
+- Habría que añadir una opción para poder confirmar la realización de esos pedidos, y que pasase por diferentes estados, y según el estado, se pudiera eliminar o modificar o solamente ver si ya se ha confirmado
+
+
 ### Sistema de Contacto
 
 El formulario de contacto no solo envía emails (simulado), sino que guarda los mensajes en una tabla `contact_messages`. Los administradores pueden leer y borrar estos mensajes desde su panel.
 
+Mejoras por realizar:
+- Habría que añadir una opción para poder responder a esos mensajes
+
 ### Seguridad
 
 He creado un Middleware llamado `AdminMiddleware`. Este actúa de barrera: si un usuario intenta entrar a una ruta `/admin` y no tiene el rol correcto, el sistema lo bloquea automáticamente (Error 403), independientemente de si conoce la URL.
+
+---
+
+
+#### Mejoras por realizar en general:
+- Añadir la opción para que también puedan realizar un pedido los usuarios que no esten logueados, añadiendo la opción de registrarse/loguearse antes de realizar el pedido del carrito.
+- Añadir una pasarela de pago para realizar el pedido
+- Añadir en contacto un mapa interactivo de ubicación
+- Añadir a la categoria iconos personalizados en lugar de uno genérico, diferenciando cada 1 de las categorias diferentes
 
 ---
 
