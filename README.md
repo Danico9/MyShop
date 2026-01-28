@@ -166,7 +166,7 @@ Para terminar, llena la base de datos y compila los estilos.
 
 ----------
 
-**Siguiente paso:** Una vez se realizan estos pasos, se va al navegador en Windows y entra a `http://localhost`. Deberías ver tu proyecto funcionando exactamente igual que en el otro portátil
+**Siguiente paso:** Una vez se realizan estos pasos, se va al navegador en Windows y entra a `http://localhost`. Deberías ver tu proyecto funcionando exactamente igual que en el otro dispositivo
 
 
 ---
