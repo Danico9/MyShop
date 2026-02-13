@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
@@ -26,7 +26,7 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Instalar dependencias de PHP (Modo Producción)
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader
 
 # Dar permisos a la carpeta de almacenamiento
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
