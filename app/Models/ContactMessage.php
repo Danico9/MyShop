@@ -17,4 +17,5 @@ class ContactMessage extends Model
         'subject',  // Asunto del mensaje
         'message',  // Contenido del mensaje
     ];
+
 }

@@ -1,6 +1,6 @@
 @props(['product', 'class' => ''])
 
-<div class="bg-white rounded-lg shadow-lg overflow-hidden product-card {{ $class }} relative">
+<div class="bg-white rounded-lg shadow-lg overflow-hidden product-card {{ $class }} relative flex flex-col h-full">
 
     @if($product->offer)
     <div class="absolute top-0 right-0 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold px-3 py-1 rounded-bl-lg z-10">
@@ -14,7 +14,7 @@
     </div>
     @endisset
 
-    <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+    <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden shrink-0">
         @if(!empty($product->image))
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
         @else
@@ -22,35 +22,34 @@
         @endif
     </div>
 
-    <div class="p-6">
+    <div class="p-6 flex flex-col flex-grow">
         <h4 class="text-xl font-bold mb-2 text-gray-900">{{ $product->name }}</h4>
         <p class="text-gray-600 mb-4">{{ Str::limit($product->description, 80) }}</p>
 
-        @if($product->offer)
-        <div class="mb-4">
-                <span class="inline-block bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
-                    🏷️ {{ $product->offer->name }}
-                </span>
-        </div>
-        @endif
-
         <div class="mb-4">
             @if($product->offer)
-            <div class="flex items-baseline gap-2">
-                <span class="text-sm text-gray-400 line-through">€{{ number_format($product->price, 2) }}</span>
-                <span class="text-2xl font-bold text-orange-600">€{{ number_format($product->final_price, 2) }}</span>
-            </div>
+                <span class="inline-block bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full mb-2">
+                    🏷️ {{ $product->offer->name }}
+                </span>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-sm text-gray-400 line-through">€{{ number_format($product->price, 2) }}</span>
+                    <span class="text-2xl font-bold text-orange-600">€{{ number_format($product->final_price, 2) }}</span>
+                </div>
             @else
-            <span class="text-2xl font-bold text-primary-600">€{{ number_format($product->price, 2) }}</span>
+                {{-- Espaciador invisible para mantener altura si no hay oferta --}}
+                <div class="h-6 mb-2"></div> 
+                <span class="text-2xl font-bold text-primary-600">€{{ number_format($product->price, 2) }}</span>
             @endif
         </div>
 
-        @isset($actions)
-        {{ $actions }}
-        @else
-        <a href="{{ route('products.show', $product->id) }}" class="block text-center bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition">
-            Ver Detalles
-        </a>
-        @endisset
+        <div class="mt-auto">
+            @isset($actions)
+            {{ $actions }}
+            @else
+            <a href="{{ route('products.show', $product->id) }}" class="block text-center bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition">
+                Ver Detalles
+            </a>
+            @endisset
+        </div>
     </div>
 </div>

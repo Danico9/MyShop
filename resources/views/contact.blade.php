@@ -106,10 +106,15 @@
 
         <!-- Mapa -->
         <div class="mt-12 bg-white rounded-lg shadow-lg overflow-hidden h-96 relative">
-            <div class="absolute inset-0 bg-gray-300 flex items-center justify-center">
-                <!--  <span class="text-gray-600 font-medium">Mapa Interactivo de Ubicación </span> -->
-                <img src="{{ asset('storage/images/contact/mapa.jpg') }}" alt="Mapa de contacto" class="w-full h-full object-cover">
-            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3079.450235040022!2d-0.3790176846115984!3d39.47023907948633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf4aa223d%3A0x629580427b203c6!2sPla%C3%A7a%20de%20l&#39;Ajuntament%2C%2046002%20Val%C3%A8ncia%2C%20Valencia!5e0!3m2!1ses!2ses!4v1645000000000!5m2!1ses!2ses"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
     </div>
 </div>

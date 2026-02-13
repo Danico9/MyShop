@@ -40,17 +40,21 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <div class="text-sm text-gray-600">
-                                    {{ $order->items->count() }} items
+                                <div class="text-sm font-semibold text-gray-700">
+                                    {{ $order->items->count() }} {{ $order->items->count() == 1 ? 'producto' : 'productos' }}
                                 </div>
-                                <div class="text-xs text-gray-400 mt-1">
-                                    @foreach($order->items->take(3) as $item)
-                                        <div>- {{ $item->quantity }}x {{ Str::limit($item->product_name, 15) }}</div>
+                                <ul class="mt-1 space-y-1">
+                                    @foreach($order->items as $item)
+                                        <li class="text-xs text-gray-500 flex items-center">
+                                            <span class="inline-flex items-center justify-center bg-gray-100 rounded px-1.5 py-0.5 font-bold text-gray-700 mr-2">
+                                                {{ $item->quantity }}x
+                                            </span>
+                                            <span class="truncate max-w-[150px]" title="{{ $item->product_name }}">
+                                                {{ $item->product_name }}
+                                            </span>
+                                        </li>
                                     @endforeach
-                                    @if($order->items->count() > 3)
-                                        <div>...</div>
-                                    @endif
-                                </div>
+                                </ul>
                             </td>
 
                             <td class="px-6 py-4">

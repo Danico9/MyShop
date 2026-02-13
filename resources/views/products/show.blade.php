@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col">
             <h1 class="text-3xl font-bold text-gray-900 mb-4">
                 {{ $product->name }}
             </h1>
@@ -36,6 +36,7 @@
                     ¡Ahorra €{{ number_format($product->price - $product->final_price, 2) }}!
                 </p>
                 @else
+                <div class="h-6"></div> {{-- Espaciador para igualar altura si no hay oferta --}}
                 <span class="text-4xl font-bold text-primary-600">
                             €{{ number_format($product->price, 2) }}
                         </span>
@@ -64,7 +65,7 @@
             @endif
 
             <!-- Botones de Acción -->
-            <div class="flex items-center space-x-4">
+            <div class="mt-auto flex flex-wrap items-center gap-4">
                 <form action="{{ route('cart.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">

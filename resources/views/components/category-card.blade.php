@@ -1,5 +1,5 @@
 <div class="bg-white rounded-lg shadow-lg p-6 product-card cursor-pointer {{ $class }}">
-    <div class="text-4xl text-primary-500 mb-4">🖥️</div>
+    <div class="text-4xl text-primary-500 mb-4">{{ $category->icon }}</div>
 
     <h4 class="text-xl font-bold mb-2 text-gray-900">
         {{ $category->name }}

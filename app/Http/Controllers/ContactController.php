@@ -32,7 +32,7 @@ class ContactController extends Controller
 
         // Aquí iría la lógica para enviar un correo o guardar en base de datos
         // Por ahora, simulamos el éxito y redirigimos de vuelta
-        \App\Models\ContactMessage::create($validated);
+        ContactMessage::create($validated);
 
         return redirect()->route('contact')
             ->with('success', '¡Gracias por contactarnos! Tu mensaje ha sido enviado correctamente.');
@@ -43,7 +43,7 @@ class ContactController extends Controller
      */
     public function adminIndex(): View
     {
-        $messages = \App\Models\ContactMessage::latest()->get();
+        $messages = ContactMessage::latest()->get();
 
         return view('admin.contact.index', compact('messages'));
     }
@@ -53,7 +53,7 @@ class ContactController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $message = \App\Models\ContactMessage::findOrFail($id);
+        $message = ContactMessage::findOrFail($id);
         $message->delete();
 
         return redirect()->route('admin.contact.index')->with('success', 'Mensaje eliminado correctamente.');
