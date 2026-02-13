@@ -12,7 +12,7 @@ services:
       - ./storage:/var/www/storage
     env_file: .env
     environment:
-      - APP_KEY=base64:BBpIvgz7TWhiYxA/bqgWMBTEa7EcBO0f1ZJkP8yeWH0=
+      - APP_KEY=base64:Vy+6qvab7lJ3sWIHJUT0ydhJxCQ/S5MIrndMOZLNRyk=
     networks:
       - laravel
 
