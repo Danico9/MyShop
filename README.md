@@ -238,11 +238,3 @@ He creado un Middleware llamado `AdminMiddleware`. Este actúa de barrera: si un
 *   **`contact_messages`**: Almacenamiento persistente de las dudas de los usuarios.
 
 
-## Autor
-
-**Daniel**
-
-Estudiante de 2º DAW Semipresencial - IES Juan de Garay, Valencia
-
-- GitHub: https://github.com/Danico9/MyShop
-- Email: dancisbla@alu.edu.gva.es
