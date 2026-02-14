@@ -10,6 +10,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./storage:/var/www/storage
+      - ./public:/var/www/public
     env_file: .env
     environment:
       - APP_KEY=base64:Vy+6qvab7lJ3sWIHJUT0ydhJxCQ/S5MIrndMOZLNRyk=
