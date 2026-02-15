@@ -14,9 +14,9 @@ La arquitectura se basa en el patrón **MVC** y prioriza la seguridad y la escal
 
 ## Tecnologías y Herramientas
 
-* **Backend:** Laravel 12 (Soporte para PHP 8.4+).
+* **Backend:** Laravel 12 (Soporte para PHP 8.5+).
 * **Frontend:** Motor de plantillas Blade + Tailwind CSS.
-* **Base de Datos:** MySQL 8.0.
+* **Base de Datos:** MySQL 8.4.
 * **Infraestructura:** Docker & Laravel Sail (Entorno de desarrollo aislado).
 * **Autenticación:** Laravel Breeze (Personalizado).
 
@@ -63,7 +63,7 @@ Abre tu terminal de Ubuntu (el ubuntu24 que acabamos de instalar danic/admin) y 
 
 -   Añade el repositorio de PHP: `sudo add-apt-repository ppa:ondrej/php -y` y `sudo apt update`.
 
--   Instala PHP 8.4: `sudo apt install -y php8.4-cli php8.4-common php8.4-curl php8.4-mbstring php8.4-xml php8.4-mysql`.
+-   Instala PHP 8.4+: `sudo apt install -y php8.4-cli php8.4-common php8.4-curl php8.4-mbstring php8.4-xml php8.4-mysql`.
 
 -   Instala Composer:
 
