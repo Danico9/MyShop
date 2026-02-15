@@ -1,21 +1,24 @@
-# Proyecto MyShop - Tienda Online con Laravel 
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql)
+![Docker](https://img.shields.io/badge/Docker-Sail-2496ED?style=for-the-badge&logo=docker)
 
 ## Descripción del Proyecto
-TechValencia es una aplicación web de comercio electrónico completa que he desarrollado utilizando el framework Laravel 12. El objetivo del proyecto es simular el funcionamiento real de una tienda online, gestionando desde el catálogo de productos hasta la tramitación de pedidos y su administración.
 
-El sistema está diseñado con una arquitectura MVC y cuenta con un sistema de roles robusto que diferencia claramente entre clientes y administradores, permitiendo funcionalidades específicas para cada uno, como un panel de gestión privado o un historial de pedidos personal.
+**TechValencia** es una plataforma integral de comercio electrónico desarrollada con **Laravel 12**. El proyecto simula un entorno de producción real, abarcando desde la gestión del catálogo y usuarios hasta el procesamiento de pedidos y administración del sistema.
+
+La arquitectura se basa en el patrón **MVC** y prioriza la seguridad y la escalabilidad, implementando un sistema de roles (RBAC) y un despliegue containerizado mediante **Docker**.
 
 ---
 
-## Tecnologías Utilizadas
+## Tecnologías y Herramientas
 
-Para el desarrollo he utilizado las siguientes herramientas y versiones:
-
-*   **Backend:** Laravel 12 (PHP 8.4+)
-*   **Frontend:** Blade Templates con Tailwind CSS para el diseño.
-*   **Base de Datos:** MySQL 8.0
-*   **Entorno:** Docker a través de Laravel Sail (para asegurar que funcione igual en cualquier máquina).
-*   **Autenticación:** Laravel Breeze.
+* **Backend:** Laravel 12 (Soporte para PHP 8.4+).
+* **Frontend:** Motor de plantillas Blade + Tailwind CSS.
+* **Base de Datos:** MySQL 8.0.
+* **Infraestructura:** Docker & Laravel Sail (Entorno de desarrollo aislado).
+* **Autenticación:** Laravel Breeze (Personalizado).
 
 ---
 
@@ -211,8 +214,6 @@ Mejoras por realizar:
 
 El formulario de contacto no solo envía emails (simulado), sino que guarda los mensajes en una tabla `contact_messages`. Los administradores pueden leer y borrar estos mensajes desde su panel.
 
-Mejoras por realizar:
-- Habría que añadir una opción para poder responder a esos mensajes
 
 ### Seguridad
 
@@ -222,10 +223,17 @@ He creado un Middleware llamado `AdminMiddleware`. Este actúa de barrera: si un
 
 
 #### Mejoras por realizar en general:
-- Añadir la opción para que también puedan realizar un pedido los usuarios que no esten logueados, añadiendo la opción de registrarse/loguearse antes de realizar el pedido del carrito.
-- Añadir una pasarela de pago para realizar el pedido
-- Añadir en contacto un mapa interactivo de ubicación
-- Añadir a la categoria iconos personalizados en lugar de uno genérico, diferenciando cada 1 de las categorias diferentes
+- Pasarela de Pago: Integración con Stripe/PayPal para procesar cobros reales.
+
+- Gestión de Pedidos Avanzada: Permitir al admin cambiar estados (Pendiente -> Enviado -> Entregado).
+
+- Guest Checkout: Permitir finalizar compra sin registro previo obligando al login/registro en el último paso.
+
+- Mapa Interactivo: Integración de Google Maps/Leaflet en la sección de contacto.
+
+- Feedback de Admin: Capacidad de responder mensajes de contacto directamente desde el panel.
+
+- Categorización Visual: Iconos dinámicos y personalizados para cada categoría de productos.
 
 ---
 
